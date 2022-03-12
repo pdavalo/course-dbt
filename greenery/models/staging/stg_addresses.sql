@@ -1,5 +1,3 @@
-{{ config(materialized='table') }}
-
 select 
   address_id, 
   address, 
