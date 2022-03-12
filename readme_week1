@@ -82,3 +82,4 @@ from
     created_at_hour) as "unique_sessions_per_hour"
 
 > 16.3275862068965517
+(Note that this does not count sessions which didn't have some event on the whole hour - we cannot count those sessions from the available data.)
