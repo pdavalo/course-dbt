@@ -1,4 +1,4 @@
-How many users do we have?
+* How many users do we have?
 
 select 
   count(distinct(user_id)) 
@@ -8,7 +8,7 @@ from
 > 130
 
 
-On average, how many orders do we receive per hour?
+* On average, how many orders do we receive per hour?
 
 select 
   avg(daily_count.cnt)
@@ -24,7 +24,7 @@ from
 > 180.5
 
 
-On average, how long does an order take from being placed to being delivered?
+* On average, how long does an order take from being placed to being delivered?
 
 select 
   avg(deliv_times.deliv_time) 
@@ -39,7 +39,7 @@ from
 > 3 days 21:24:11.803279
 
 
-How many users have made only 1 purchase? Two purchases? 3+ purchases? 
+* How many users have made only 1 purchase? Two purchases? 3+ purchases? 
 
 select 
   nb_purchases_v2,
@@ -68,7 +68,7 @@ select
 3+ --> 71
 
 
-On average, how many unique sessions do we have per hour?
+* On average, how many unique sessions do we have per hour?
 
 select 
   avg(nb_unique_sessions)
