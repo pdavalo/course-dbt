@@ -1,3 +1,5 @@
+{{ config(materialized='table') }}
+
 select
   event_id,
   session_id,
