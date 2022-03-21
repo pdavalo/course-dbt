@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: fact_user_order
+    description: Descriptions about orders at a user level
+    columns:
+      - name: nb_delivered_orders
+        tests:
+          - positive_values
+      - name: nb_promos_delivered
+        tests: 
+          - positive_values
+      - name: avg_order_cost
+        tests: 
+          - positive_values
+      - name: avg_product_quantity
+        tests: 
+          - positive_values
+      

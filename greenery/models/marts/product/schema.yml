@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: fact_page_views
+    description: Descriptions about orders at a user level
+    columns:
+      - name: was_an_order_generated
+        tests:
+          - positive_values
+      
