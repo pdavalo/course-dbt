@@ -1,0 +1,37 @@
+1. What is our user repeat rate?
+
+with nb_orders_per_user as (
+  select 
+    user_id, 
+    count(*) as nb_delivered_orders
+  from 
+    dbt_pablo_d.stg_orders
+  where
+    status = 'delivered'
+  group by 
+    user_id)
+select 
+  sum(case when nb_delivered_orders >= 2 then 1 else 0 end)::float / count(*) as repeat_rate
+from 
+  nb_orders_per_user
+> There is a 77% repeat rate
+
+2. 
+What are good indicators of a user who will likely purchase again?
+- If a user is browsing more products or adding product to his cart after a previous purchase (events data)
+- Maybe promos have an effect also in repeat purchases, we would need to dive into the impact of promos. 
+- Maybe there are certain segments of clients or products which are more prone to generate repeat purchases. We would need to dive into the data to verify this. 
+
+What about indicators of users who are likely NOT to purchase again?
+- Maybe there are some users who only purchased because of a promo, but they won´t purchase again without that promo
+- If a user has not been active (had a session) for a while posterior to his first purchase, maybe he´s not interested any more
+
+If you had more data, what features would you want to look into to answer this question?
+- External data as social networks activity/interests: number of likes of things on a category similar to the product we sell
+- Feedback from the client: customer satisfaction score
+- Fraud information: was the first transaction payment fraud? 
+
+3. Within each marts folder, create intermediate models and dimension/fact models.
+Explain the marts models you added. Why did you organize the models in the way you did?
+> Created the suggested dim and fact models, which make sense from a business perspective. Also created an intermediate int_orders_with_items model to be used when creating the fact_user_order table.
+
