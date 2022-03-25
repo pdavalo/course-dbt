@@ -1,0 +1,38 @@
+1. 
+with sessions_converted as (
+select 
+  session_id
+from
+  dbt_pablo_d.stg_events
+where
+  event_type = 'checkout'
+), 
+
+unique_sessions as (
+select 
+  distinct(session_id)
+from 
+  dbt_pablo_d.stg_events
+)
+
+select 
+  (select count(1) from sessions_conv)::float / (select count(1) from unique_sessions) as conv_rate
+> 63%
+
+2. 
+with product_views_and_purchases as (
+select 
+  product_id, 
+  sum(product_viewed) nb_times_viewed,
+  sum(purchased) nb_times_purchased
+from
+  dbt_pablo_d.dim_sessions_with_purchase
+group by product_id
+)
+
+select 
+  product_id,
+  nb_times_purchased::float / nb_times_viewed as conversion
+from 
+  product_views_and_purchases
+> 
