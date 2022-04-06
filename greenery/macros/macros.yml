@@ -1,0 +1,14 @@
+version: 2
+
+macros:
+  - name: get_distinct_values
+    description: Gets an ordered list of the distinct values on a column
+    docs:
+      show: true
+    arguments:
+      - name: model
+        type: <string>
+        description: name of the model 
+      - name: column
+        type: <string>
+        description: name of the target column 

@@ -1,9 +1,4 @@
 SELECT
-  user_id,
-  first_name,
-  last_name,
-  email,
-  phone_number,
-  created_at as user_created_at,
-  address_id
+  {{ dbt_utils.star(from = source('postgres', 'users'), except = ["updated_at", "created_at"]) }},
+  created_at as user_created_at
 from {{source('postgres', 'users')}}

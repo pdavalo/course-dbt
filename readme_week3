@@ -1,4 +1,7 @@
-1. 
+Part I 
+
+* What is our overall conversion rate?
+
 with sessions_converted as (
 select 
   session_id
@@ -19,14 +22,16 @@ select
   (select count(1) from sessions_conv)::float / (select count(1) from unique_sessions) as conv_rate
 > 63%
 
-2. 
+
+* What is our conversion rate by product?
+
 with product_views_and_purchases as (
 select 
   product_id, 
   sum(product_viewed) nb_times_viewed,
   sum(purchased) nb_times_purchased
 from
-  dbt_pablo_d.dim_sessions_with_purchase
+  dbt_pablo_d.dim_sessions
 group by product_id
 )
 
@@ -35,4 +40,18 @@ select
   nb_times_purchased::float / nb_times_viewed as conversion
 from 
   product_views_and_purchases
-> 
+> had trouble downloading csv file with answer from gitpod graphical querying interface - attached screenshot on slack thread
+
+Part II 
+Create a Macro to simplify part of your models. 
+--> created get_distinct_values.sql
+
+Part III
+Add a post hook to your project to apply grants to the role “reporting”.
+--> Done
+
+Part IV
+Installed dbt-utils, and used the star function at the stg_users.sql model to simplify the querying syntax
+
+Part V   
+Had troubles running `dbt docs serve --no-browser`, refused connection. 
